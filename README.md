@@ -158,3 +158,30 @@ h1, h2 {
 .next { right: 10px; }
 
 .prev:hover, .next:hover { color: #ff4081; }
+let photos = document.querySelectorAll('.gallery .photo img');
+let captions = Array.from(document.querySelectorAll('.gallery .photo')).map(p => p.dataset.caption);
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  document.getElementById('lightbox').style.display = 'flex';
+  updateLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+
+function changeSlide(n) {
+  currentIndex += n;
+  if(currentIndex < 0) currentIndex = photos.length - 1;
+  if(currentIndex >= photos.length) currentIndex = 0;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  document.getElementById('lightbox-img').src = photos[currentIndex].src;
+  document.getElementById('caption').innerText = captions[currentIndex];
+}
+
+console.log("Aarohi's Full Photo Gallery Website Ready!");
